@@ -22,7 +22,10 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Auth::user()->events;
+        $events = Auth::user()->events()
+            ->orderBy('date', 'desc')
+            ->orderBy('time', 'desc')
+            ->get();
         return view('event.index', compact('events'));
     }
 
